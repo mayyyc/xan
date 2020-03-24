@@ -12,5 +12,6 @@ class Game {
   }
   setStage(stage) {
     this.stage = stage;
+    console.log("this.stage :", this.stage);
   }
 }

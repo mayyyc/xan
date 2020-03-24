@@ -2,7 +2,6 @@ class Start {
   constructor() {
     this.typing = new Typing();
     this.msg = new Message();
-    this.send = new Send(420, centerY + 400, 60);
     this.cursor = new Cursor();
     this.count = 0;
     this.stage = 0;
@@ -141,42 +140,5 @@ class Cursor {
       line(x, y, x, y + 60);
     }
     this.count += 1;
-  }
-}
-
-class Send {
-  constructor(x, y, size) {
-    this.x = x;
-    this.y = y;
-    this.size = size;
-    this.disabled = true;
-    this.clicked = false;
-  }
-  draw() {
-    noStroke();
-    if (this.disabled) {
-      fill(darker);
-    } else {
-      fill(yellow);
-    }
-    ellipse(this.x, this.y, this.size, this.size);
-    imageMode(CORNER);
-    image(sendMsg, this.x, this.y, this.size, this.size);
-  }
-  enable() {
-    this.disabled = false;
-  }
-  clickListener() {
-    if (!this.disabled) {
-      if (
-        currentTouch.x > this.x &&
-        currentTouch.x < this.x + this.size &&
-        currentTouch.y > this.y &&
-        currentTouch.y < this.y + this.size
-      ) {
-        console.log("clicked");
-        return true;
-      }
-    }
   }
 }
