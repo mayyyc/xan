@@ -38,6 +38,8 @@ let world;
 let ground;
 let wallLeft;
 let wallRight;
+let trophyBody;
+let finishHintBody;
 
 function preload() {
   stopwatch = loadImage("assets/stopwatch.png");
@@ -75,6 +77,7 @@ function setup() {
   error = color("#8C2A3C");
   currentTouch = new Touch();
   start = new Start();
+  level6 = new Level(6);
   level5 = new Level(5);
   level4 = new Level(4);
   level3 = new Level(3);
@@ -91,28 +94,31 @@ function draw() {
   background(grass);
   // level1.hint();
   // level5.timer();
-  // level5.run();
-  // finish.run();
-  switch (game.getStage()) {
-    case 0:
-      start.run();
-      break;
-    case 1:
-      level1.run();
-      break;
-    case 2:
-      level2.run();
-      break;
-    case 3:
-      level3.run();
-      break;
-    case 4:
-      level4.run();
-      break;
-    case 5:
-      level5.run();
-      break;
-  }
+  // level6.run();
+  finish.run();
+  // switch (game.getStage()) {
+  //   case 0:
+  //     start.run();
+  //     break;
+  //   case 1:
+  //     level1.run();
+  //     break;
+  //   case 2:
+  //     level2.run();
+  //     break;
+  //   case 3:
+  //     level3.run();
+  //     break;
+  //   case 4:
+  //     level4.run();
+  //     break;
+  //   case 5:
+  //     level5.run();
+  //     break;
+  //   case 6:
+  //     level6.run();
+  //     break;
+  // }
 }
 
 function touchEnded() {

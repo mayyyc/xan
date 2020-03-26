@@ -17,21 +17,36 @@ class Finish {
 
     // trophy
     imageMode(CENTER);
-    image(trophy, centerX, centerY - 340, 180, 180);
-
+    if (this.count > fr && this.count <= fr * 2) {
+      image(
+        trophy,
+        centerX,
+        centerY - 425 + (2 * fr - this.count),
+        100 + this.count * 3,
+        100 + this.count * 3
+      );
+    } else if (this.count > fr * 2) {
+      image(trophy, centerX, centerY - 425, 244, 244);
+    }
     //text
     textFont(headingFont);
     textAlign(CENTER, CENTER);
     noStroke();
     fill(light);
-    textSize(60);
-    text("YOU'RE", centerX, centerY - 200);
-    text("ENOUGH!", centerX, centerY);
-    textSize(80);
-    text("XAN", centerX, centerY - 105);
+    if (this.count < 2 * fr) {
+      textSize(60);
+      text("YAY!", centerX, centerY - 180);
+      text("YOU DID IT!", centerX, centerY - 80);
+    } else {
+      textSize(60);
+      text("YOU'RE", centerX, centerY - 220);
+      text("ENOUGH!", centerX, centerY - 10);
+      textSize(80);
+      text("XAN", centerX, centerY - 120);
+    }
 
     //smile faces
-    if (this.count > fr && this.count < fr * 8 && this.count % 2 === 0)
+    if (this.count > fr * 3 && this.count < fr * 10 && this.count % 2 === 0)
       this.smileFaces.push(new SmileFace());
     Engine.update(engine);
     for (var i = 0; i < this.smileFaces.length; i++) {
@@ -61,10 +76,26 @@ class Finish {
       windowHeight,
       options
     );
+    trophyBody = Bodies.rectangle(
+      windowWidth / 2,
+      centerY - 425,
+      160,
+      244,
+      options
+    );
+    finishHintBody = Bodies.rectangle(
+      windowWidth / 2,
+      centerY - 100,
+      550,
+      400,
+      options
+    );
 
-    World.add(world, ground);
-    World.add(world, wallLeft);
-    World.add(world, wallRight);
+    World.add(world, [ground, wallLeft, wallRight, trophyBody, finishHintBody]);
+    // World.add(world, wallLeft);
+    // World.add(world, wallRight);
+    // World.add(world, wallRight);
+    // World.add(world, wallRight);
   }
 }
 

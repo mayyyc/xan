@@ -2,13 +2,15 @@ const failedCopy = [
   "Come on!",
   "You can do it!",
   "I believe in you!",
-  "U r almost there!"
+  "U r almost there!",
+  "So close!"
 ];
-const succeededCopy = ["Well done!", "Good job!", "Yay!"];
+const succeededCopy = ["Well done!", "Good job!", "Yay!", "Groovy!"];
 
 class Level {
   constructor(level) {
     this.level = level;
+    this.lastLevel = 6;
     this.totalRow = 1 + level * 2;
     this.emojiWidth = 80 - level * 5;
     this.emojis = [];
@@ -36,11 +38,13 @@ class Level {
     noStroke();
     fill(light);
     textSize(60);
-    text(
-      this.level === 1 ? "Which is Xan's" : `Level ${this.level - 1}`,
-      centerX,
-      200
-    );
+    const levelHeader =
+      this.level === 1
+        ? "Which is Xan's"
+        : this.level === this.lastLevel
+        ? "Level Evil"
+        : `Level ${this.level - 1}`;
+    text(levelHeader, centerX, 200);
     this.level === 1 && text("favourite emoji?", centerX, 260);
     if (this.level !== 1) this.timer();
     for (let row = 0; row < this.totalRow; row++) {
@@ -64,7 +68,7 @@ class Level {
       this.hint();
       console.log("succeed");
       // proceed to next level
-      if (this.level < 5) {
+      if (this.level < this.lastLevel) {
         setTimeout(() => {
           game.setStage(this.level + 1);
           this.count = 0;
@@ -126,7 +130,7 @@ class Level {
     );
   }
   hint() {
-    if (this.level === 5 && this.succeeded) {
+    if (this.level === this.lastLevel && this.succeeded) {
       finish.run();
     } else {
       //container
