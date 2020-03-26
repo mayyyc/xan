@@ -1,17 +1,24 @@
 class Game {
   constructor() {
     this.stage = 0;
-    this.state = undefined;
+  }
+  reset() {
+    this.stage = 0;
   }
   getStage() {
     return this.stage;
   }
-  reset() {
-    this.stage = 0;
-    this.state = undefined;
-  }
   setStage(stage) {
+    if (stage === 0) {
+      start = new Start();
+      level5 = new Level(5);
+      level4 = new Level(4);
+      level3 = new Level(3);
+      level2 = new Level(2);
+      level1 = new Level(1);
+      finish = new Finish();
+    }
     this.stage = stage;
-    console.log("this.stage :", this.stage);
+    this.state = undefined;
   }
 }

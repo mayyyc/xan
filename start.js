@@ -1,7 +1,8 @@
 class Start {
   constructor() {
     this.typing = new Typing();
-    this.msg = new Message();
+    this.msgReady = new Message("ready");
+    this.msgSmile = new Message("smile");
     this.cursor = new Cursor();
     this.count = 0;
     this.stage = 0;
@@ -19,8 +20,6 @@ class Start {
     text("TEST", centerX, centerY - 250);
     textSize(240);
     text("XAN", centerX, centerY - 460);
-    // imageMode(CENTER);
-    // image(smilingFace, centerX, centerY - 400, 80, 80);
 
     // input container
     strokeWeight(5);
@@ -39,12 +38,12 @@ class Start {
     if (this.count < 3 * fr) {
       this.typing.draw(centerX - 300, centerY);
     } else if (this.count < 4 * fr) {
-      this.msg.draw("ready", centerX - 300, centerY);
+      this.msgReady.draw(centerX - 300, centerY);
     } else if (this.count < 5 * fr) {
-      this.msg.draw("ready", centerX - 300, centerY);
+      this.msgReady.draw(centerX - 300, centerY);
       this.cursor.draw(centerX - 260, centerY + 420);
     } else {
-      this.msg.draw("ready", centerX - 300, centerY);
+      this.msgReady.draw(centerX - 300, centerY);
       if (this.clicked !== true) {
         imageMode(CORNER);
         image(smilingFace, centerX - 260, centerY + 420, 60, 60);
@@ -58,11 +57,14 @@ class Start {
       ) {
         this.clicked = true;
         setTimeout(() => {
+          this.count = 0;
+          this.stage = 0;
+          this.clicked = false;
           game.setStage(1);
-        }, 1000);
+        }, 2000);
       }
       if (this.clicked === true) {
-        this.msg.draw("smile", centerX + 150, centerY + 100);
+        this.msgSmile.draw(centerX + 150, centerY + 100);
       }
     }
     this.count += 1;
@@ -105,21 +107,22 @@ class Typing {
 }
 
 class Message {
-  constructor() {
+  constructor(type) {
     this.increment = PI / fr;
     this.count = 0;
+    this.type = type;
   }
-  draw(type, x, y) {
+  draw(x, y) {
     const yWithOffset = y - sin(this.count * this.increment) * 20;
-    if (type === "ready") {
+    if (this.type === "ready") {
       noStroke();
       fill(dark);
-      rect(x, yWithOffset, 480, 80, 40);
+      rect(x, yWithOffset, 410, 80, 40);
       textFont(contextFont);
       textAlign(LEFT, TOP);
       fill(light);
       textSize(48);
-      text("Ready for the test?", x + 30, yWithOffset);
+      text("Up for the test?", x + 30, yWithOffset + 5);
     } else {
       imageMode(CORNER);
       image(smilingFace, x + 20, yWithOffset + 10, 150, 150);
