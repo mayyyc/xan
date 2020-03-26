@@ -95,30 +95,30 @@ function draw() {
   // level1.hint();
   // level5.timer();
   // level6.run();
-  finish.run();
-  // switch (game.getStage()) {
-  //   case 0:
-  //     start.run();
-  //     break;
-  //   case 1:
-  //     level1.run();
-  //     break;
-  //   case 2:
-  //     level2.run();
-  //     break;
-  //   case 3:
-  //     level3.run();
-  //     break;
-  //   case 4:
-  //     level4.run();
-  //     break;
-  //   case 5:
-  //     level5.run();
-  //     break;
-  //   case 6:
-  //     level6.run();
-  //     break;
-  // }
+  // finish.run();
+  switch (game.getStage()) {
+    case 0:
+      start.run();
+      break;
+    case 1:
+      level1.run();
+      break;
+    case 2:
+      level2.run();
+      break;
+    case 3:
+      level3.run();
+      break;
+    case 4:
+      level4.run();
+      break;
+    case 5:
+      level5.run();
+      break;
+    case 6:
+      level6.run();
+      break;
+  }
 }
 
 function touchEnded() {
